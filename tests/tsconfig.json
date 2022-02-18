@@ -1,0 +1,9 @@
+{
+  "extends": "../app/tsconfig.json",
+  "compilerOptions": {
+    /**
+     * Required for ts-jest: https://github.com/kulshekhar/ts-jest/wiki/Troubleshooting#commonjs-compatibility
+     */
+    "esModuleInterop": true
+  }
+}

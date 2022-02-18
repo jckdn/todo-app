@@ -1,0 +1,30 @@
+#app {
+  margin: 0 auto;
+  width: clamp(300px, 50%, 500px);
+}
+
+.todo-list__form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-list__title-input {
+  flex-grow: 1;
+  margin-right: 1em;
+}
+
+.todo-item {
+  margin: 1em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.todo-item__title {
+  margin-right: auto;
+  padding: 0em 1em;
+}
+
+.todo-item__title--complete {
+  text-decoration: line-through;
+}

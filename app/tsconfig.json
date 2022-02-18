@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "sourceMap": true,
+    /**
+     * TODO: The only node type we need is `process` which webpack deals with at compile
+     * time. How to only include that type rather than all node types?
+     */
+    "types": ["node"]
+  }
+}
