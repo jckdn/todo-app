@@ -1,5 +1,4 @@
 import React from "react";
-import classNames from "classnames";
 import { Item } from "./TodoList";
 
 interface Props {
@@ -11,22 +10,15 @@ interface Props {
 function TodoItem(props: Props) {
   const { item, onToggleItemComplete, onDeleteItem } = props;
 
-  const renderTitle = () => {
-    const className = classNames("todo-item__title", {
-      "todo-item__title--complete": item.complete,
-    });
-
-    return <span className={className}>{item.title}</span>;
-  };
-
   return (
     <div className="todo-item">
       <input
+        className="todo-item__checkbox"
         type="checkbox"
         checked={item.complete}
         onChange={() => onToggleItemComplete(item)}
       ></input>
-      {renderTitle()}
+      <span className={'todo-item__title'}>{item.title}</span>
       <button onClick={() => onDeleteItem(item.id)}>Delete</button>
     </div>
   );

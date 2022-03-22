@@ -25,6 +25,6 @@
   padding: 0em 1em;
 }
 
-.todo-item__title--complete {
+.todo-item__checkbox:checked + span {
   text-decoration: line-through;
 }
