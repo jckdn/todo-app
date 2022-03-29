@@ -70,7 +70,7 @@ function TodoList(props: TodoListProps) {
     </form>
   );
 
-  const itemsList = items.map((item: Item) => (
+  const listItems = items.map((item: Item) => (
     <TodoItem
       key={item.id}
       item={item}
@@ -82,7 +82,7 @@ function TodoList(props: TodoListProps) {
   return (
     <>
       {addItemForm}
-      {itemsList}
+      <div className="todo-list__list">{listItems}</div>
     </>
   );
 }
