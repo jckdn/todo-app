@@ -66,7 +66,7 @@ function TodoList(props: TodoListProps) {
         value={newItemTitle}
         onChange={(event) => setNewItemTitle(event.currentTarget.value)}
       ></input>
-      <input type="submit" value="Add" disabled={!newItemTitle.trim()}></input>
+      <button disabled={!newItemTitle.trim()}>Add</button>
     </form>
   );
 
