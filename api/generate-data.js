@@ -4,11 +4,7 @@ import fs from 'fs';
 import chalk from 'chalk';
 import path from 'path';
 import dirname from '../utils/dirname.js';
-/**
- * NOTE: ATTOW version 6* of faker.js (the newly forked, non-vandalised faker) seems to
- * produce unexpected output with json-schema-faker, 5.5.3 works fine.
- */
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 
 jsf.extend('faker', () => faker);
 const sample = await jsf.resolve(schema);
