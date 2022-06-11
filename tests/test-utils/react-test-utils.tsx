@@ -30,7 +30,7 @@ function render(ui: ReactElement, options: RenderOptions = {}) {
     ...rtlRenderOptions
   } = options;
 
-  const wrapper: FC = ({ children }) => (
+  const wrapper: FC<{ children: React.ReactNode }> = ({ children }) => (
     <Provider store={store}>{children}</Provider>
   );
 

@@ -71,3 +71,4 @@ npm start # hosts the production build at http://localhost:8080.
 - The linting rules and overrides are possibly not targeting the correct files and could
   be better organised.
 - Any remaining `TODO:` style comments in the code.
+- Replace fireEvent usages with user-event? https://testing-library.com/docs/user-event/intro

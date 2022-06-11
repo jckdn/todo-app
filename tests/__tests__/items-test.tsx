@@ -50,22 +50,26 @@ test('items can be added using the Add button', async () => {
 });
 
 test('items can be added by pressing enter to submit', async () => {
+  const user = userEvent.setup();
+
   render(<TodoList></TodoList>);
 
   const input = screen.getByRole('textbox');
 
-  userEvent.type(input, 'title 1{enter}');
+  await user.type(input, 'title 1{enter}');
 
   await screen.findByText('title 1');
 });
 
 test('multiple items can be added', async () => {
+  const user = userEvent.setup();
+
   render(<TodoList></TodoList>);
 
   const input = screen.getByRole('textbox');
 
-  userEvent.type(input, 'title 1{enter}');
-  userEvent.type(input, 'title 2{enter}');
+  await user.type(input, 'title 1{enter}');
+  await user.type(input, 'title 2{enter}');
 
   await waitFor(() => {
     screen.getByText('title 1');
@@ -74,19 +78,21 @@ test('multiple items can be added', async () => {
 });
 
 test('items with blank titles cannot be added', async () => {
+  const user = userEvent.setup();
+
   render(<TodoList></TodoList>);
 
   const input = screen.getByRole('textbox');
 
   // Try adding item with blank title.
   const blankTitle = '   ';
-  userEvent.type(input, `${blankTitle}{enter}`);
+  await user.type(input, `${blankTitle}{enter}`);
 
   // Also try adding it via the Add button.
-  fireEvent.click(screen.getByText('Add'));
+  await user.click(screen.getByText('Add'));
 
   // Wait for something else to happen before we check.
-  userEvent.type(input, 'title 1{enter}');
+  await user.type(input, 'title 1{enter}');
   await screen.findByText('title 1');
 
   // Now we can check.
@@ -94,10 +100,12 @@ test('items with blank titles cannot be added', async () => {
 });
 
 test('titles of added items get trimmed', async () => {
+  const user = userEvent.setup();
+
   render(<TodoList></TodoList>);
 
   const input = screen.getByRole('textbox');
-  userEvent.type(input, ' title 1 {enter}');
+  await user.type(input, ' title 1 {enter}');
 
   await screen.findByText('title 1');
 });
