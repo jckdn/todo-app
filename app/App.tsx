@@ -1,5 +1,5 @@
 import React from "react";
-import TodoList from "./features/items/TodoList.container";
+import TodoList from "./features/items/TodoList";
 
 function App() {
   return (

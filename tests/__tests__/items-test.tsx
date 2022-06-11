@@ -8,7 +8,7 @@ import {
 } from "../test-utils/react-test-utils";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import TodoList from "../../app/features/items/TodoList.container";
+import TodoList from "../../app/features/items/TodoList";
 
 const mockInitialState = {
   items: [

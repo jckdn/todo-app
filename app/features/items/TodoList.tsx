@@ -1,33 +1,41 @@
 import React, { useState } from "react";
 import TodoItem from "./TodoItem";
-import { Item } from "./items-slice";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { Item, addItem, updateItem, deleteItem } from "./items-slice";
 
-export interface TodoListProps {
-  items: Item[];
-  onAddItem: (title: string) => void;
-  onToggleItemComplete: (item: Item) => void;
-  onDeleteItem: (itemID: number) => void;
-}
+function TodoList() {
+  const dispatch = useAppDispatch();
 
-function TodoList(props: TodoListProps) {
-  const { items, onAddItem, onToggleItemComplete, onDeleteItem } = props;
+  const items = useAppSelector((state) => {
+    return state.items;
+  });
 
   const [newItemTitle, setNewItemTitle] = useState("");
 
-  const onNewItemSubmit = (event: React.FormEvent) => {
+  const handleAddItem = (event: React.FormEvent) => {
     event.preventDefault();
+
     const trimmedTitle = newItemTitle.trim();
 
     if (!trimmedTitle) {
       return;
     }
 
-    onAddItem(trimmedTitle);
+    dispatch(addItem({ title: trimmedTitle, complete: false }));
+
     setNewItemTitle("");
   };
 
+  const handleToggleItemComplete = (item: Item) => {
+    dispatch(updateItem({ ...item, complete: !item.complete }));
+  };
+
+  const handleDeleteItem = (id: number) => {
+    dispatch(deleteItem(id));
+  };
+
   const addItemForm = (
-    <form className="todo-list__form" onSubmit={onNewItemSubmit}>
+    <form className="todo-list__form" onSubmit={handleAddItem}>
       <input
         className="todo-list__title-input"
         type="text"
@@ -43,8 +51,8 @@ function TodoList(props: TodoListProps) {
     <TodoItem
       key={item.id}
       item={item}
-      onToggleItemComplete={onToggleItemComplete}
-      onDeleteItem={onDeleteItem}
+      onToggleItemComplete={handleToggleItemComplete}
+      onDeleteItem={handleDeleteItem}
     ></TodoItem>
   ));
 
