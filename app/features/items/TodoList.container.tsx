@@ -10,24 +10,24 @@ function TodoListContainer() {
     return state.items;
   });
 
-  const onAddItem = (title: string) => {
+  const handleAddItem = (title: string) => {
     dispatch(addItem({ title, complete: false }));
   };
 
-  const onToggleItemComplete = (item: Item) => {
+  const handleToggleItemComplete = (item: Item) => {
     dispatch(updateItem({ ...item, complete: !item.complete }));
   };
 
-  const onDeleteItem = (id: number) => {
+  const handleDeleteItem = (id: number) => {
     dispatch(deleteItem(id));
   };
 
   return (
     <TodoList
       items={items}
-      onAddItem={onAddItem}
-      onToggleItemComplete={onToggleItemComplete}
-      onDeleteItem={onDeleteItem}
+      onAddItem={handleAddItem}
+      onToggleItemComplete={handleToggleItemComplete}
+      onDeleteItem={handleDeleteItem}
     />
   );
 }
