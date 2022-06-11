@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import TodoItem from './TodoItem';
-import { Item } from './items-slice';
+import React, { useState } from "react";
+import TodoItem from "./TodoItem";
+import { Item } from "./items-slice";
 
 export interface TodoListProps {
   items: Item[];
@@ -12,7 +12,7 @@ export interface TodoListProps {
 function TodoList(props: TodoListProps) {
   const { items, onAddItem, onToggleItemComplete, onDeleteItem } = props;
 
-  const [newItemTitle, setNewItemTitle] = useState('');
+  const [newItemTitle, setNewItemTitle] = useState("");
 
   const onNewItemSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -23,7 +23,7 @@ function TodoList(props: TodoListProps) {
     }
 
     onAddItem(trimmedTitle);
-    setNewItemTitle('');
+    setNewItemTitle("");
   };
 
   const addItemForm = (
@@ -31,7 +31,7 @@ function TodoList(props: TodoListProps) {
       <input
         className="todo-list__title-input"
         type="text"
-        placeholder={'Enter item title'}
+        placeholder={"Enter item title"}
         value={newItemTitle}
         onChange={(event) => setNewItemTitle(event.currentTarget.value)}
       ></input>

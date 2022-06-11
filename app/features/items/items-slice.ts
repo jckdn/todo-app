@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import itemApi from '../../api-client/item-api';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import itemApi from "../../api-client/item-api";
 
 export type ItemsState = Item[];
 
@@ -12,7 +12,7 @@ export interface Item {
 const initialState: ItemsState = [];
 
 const itemsSlice = createSlice({
-  name: 'items',
+  name: "items",
   initialState,
   reducers: {
     /**
@@ -32,7 +32,7 @@ const itemsSlice = createSlice({
         fetchItems.fulfilled,
         (items, action: PayloadAction<ItemsState>) => {
           return action.payload;
-        },
+        }
       )
       .addCase(addItem.fulfilled, (items, action: PayloadAction<Item>) => {
         items.push(action.payload);
@@ -41,7 +41,7 @@ const itemsSlice = createSlice({
         const updatedItem = action.payload;
 
         return items.map((item) =>
-          item.id === updatedItem.id ? updatedItem : item,
+          item.id === updatedItem.id ? updatedItem : item
         );
       })
       .addCase(deleteItem.fulfilled, (items, action: PayloadAction<number>) => {
@@ -61,26 +61,26 @@ const itemsSlice = createSlice({
 
 export default itemsSlice.reducer;
 
-export const fetchItems = createAsyncThunk('items/fetchItems', async () => {
+export const fetchItems = createAsyncThunk("items/fetchItems", async () => {
   return await itemApi.getItems();
 });
 
-export const addItem = createAsyncThunk('items/addItem', async (item: Item) => {
+export const addItem = createAsyncThunk("items/addItem", async (item: Item) => {
   return await itemApi.addItem(item);
 });
 
 export const updateItem = createAsyncThunk(
-  'items/updateItem',
+  "items/updateItem",
   async (item: Item) => {
     return await itemApi.addItem(item);
-  },
+  }
 );
 
 export const deleteItem = createAsyncThunk(
-  'items/deleteItem',
+  "items/deleteItem",
   async (id: number) => {
     await itemApi.deleteItem(id);
 
     return id;
-  },
+  }
 );

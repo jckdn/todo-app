@@ -1,11 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import itemsReducer from './features/items/items-slice';
+import { configureStore } from "@reduxjs/toolkit";
+import itemsReducer from "./features/items/items-slice";
 
 const store = configureStore({
   reducer: {
     items: itemsReducer,
   },
-  devTools: process.env.NODE_ENV === 'development',
+  devTools: process.env.NODE_ENV === "development",
 });
 
 export default store;

@@ -1,5 +1,5 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import type { AppState, AppDispatch } from './store';
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import type { AppState, AppDispatch } from "./store";
 
 // Source: https://react-redux.js.org/using-react-redux/usage-with-typescript#define-typed-hooks
 

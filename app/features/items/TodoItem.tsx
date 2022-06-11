@@ -1,6 +1,6 @@
-import React from 'react';
-import classNames from 'classnames';
-import { Item } from './items-slice';
+import React from "react";
+import classNames from "classnames";
+import { Item } from "./items-slice";
 
 interface Props {
   item: Item;
@@ -12,8 +12,8 @@ function TodoItem(props: Props) {
   const { item, onToggleItemComplete, onDeleteItem } = props;
 
   const renderTitle = () => {
-    const className = classNames('todo-item__title', {
-      'todo-item__title--complete': item.complete,
+    const className = classNames("todo-item__title", {
+      "todo-item__title--complete": item.complete,
     });
 
     return <span className={className}>{item.title}</span>;

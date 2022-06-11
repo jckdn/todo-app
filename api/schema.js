@@ -1,28 +1,28 @@
 export const schema = {
-  type: 'object',
+  type: "object",
   properties: {
     items: {
-      type: 'array',
+      type: "array",
       minItems: 3,
       maxItems: 5,
       items: {
-        type: 'object',
+        type: "object",
         properties: {
           id: {
-            type: 'integer',
+            type: "integer",
             minimum: 1,
           },
           title: {
-            type: 'string',
-            faker: 'lorem.sentence',
+            type: "string",
+            faker: "lorem.sentence",
           },
           complete: {
-            type: 'boolean',
+            type: "boolean",
           },
         },
-        required: ['id', 'title', 'complete'],
+        required: ["id", "title", "complete"],
       },
     },
   },
-  required: ['items'],
+  required: ["items"],
 };

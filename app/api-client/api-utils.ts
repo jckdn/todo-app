@@ -2,7 +2,7 @@ export const baseUrl = process.env.API_URL;
 
 export async function request<ResponseType>(
   resource: RequestInfo,
-  init?: RequestInit,
+  init?: RequestInit
 ) {
   try {
     const response = await fetch(resource, init);
@@ -14,7 +14,7 @@ export async function request<ResponseType>(
 }
 
 async function handleResponse<ResponseType>(
-  response: Response,
+  response: Response
 ): Promise<ResponseType> {
   if (response.ok) {
     return response.json();
@@ -27,11 +27,11 @@ async function handleResponse<ResponseType>(
     throw new Error(error);
   }
 
-  throw new Error('Network response was not OK.');
+  throw new Error("Network response was not OK.");
 }
 
 function handleError(error: Error) {
-  console.error('API call failed. ' + error);
+  console.error("API call failed. " + error);
 
   throw error;
 }

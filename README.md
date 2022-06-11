@@ -65,6 +65,7 @@ npm start # hosts the production build at http://localhost:8080.
 
 #### Dev
 
+- Shouldn't be using whatwg-fetch. Use the jest fetch mock package instead.
 - Linting extension seems to not be working with the config?
 - Would be nice to just use TS and ESM everywhere, instead of JS and CJS in places
   ([Babel](https://babeljs.io/) would help).

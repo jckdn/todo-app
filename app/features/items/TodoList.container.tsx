@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { Item, addItem, updateItem, deleteItem } from './items-slice';
-import TodoList from './TodoList';
+import React from "react";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { Item, addItem, updateItem, deleteItem } from "./items-slice";
+import TodoList from "./TodoList";
 
 function TodoListContainer() {
   const dispatch = useAppDispatch();
