@@ -13,7 +13,8 @@
     "api:build": "node api/generate-data.js",
     "preapi": "npm run api:build",
     "api": "node api/server.js",
-    "dev": "webpack serve --config webpack.dev.cjs --port 3000",
+    "client": "webpack serve --config webpack.dev.cjs --port 3000",
+    "dev": "run-p api client",
     "build": "webpack --config webpack.prod.cjs",
     "start": "http-server ./dist"
   },
@@ -40,6 +41,7 @@
     "json-server": "^0.17.0",
     "mini-css-extract-plugin": "^2.6.0",
     "msw": "^0.42.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
     "redux-devtools-extension": "^2.13.9",
     "style-loader": "^3.3.1",
