@@ -1,8 +1,7 @@
-/* eslint-disable no-undef */
-
+// Mock fetch.
 require("whatwg-fetch");
 
-// An empty string is fine for tests that use `msw` to mock the API calls.
+// Mock API URL. An empty string is fine for tests that use `msw` to mock the API calls.
 process.env.API_URL = "";
 
 // Setup the `msw` mock API.
