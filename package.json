@@ -16,7 +16,8 @@
     "client": "webpack serve --config webpack.dev.cjs --port 3000",
     "dev": "run-p api client",
     "build": "webpack --config webpack.prod.cjs",
-    "start": "http-server ./dist"
+    "start": "http-server ./dist",
+    "start:all": "run-p api start"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.2.0",
