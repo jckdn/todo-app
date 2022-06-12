@@ -1,7 +1,8 @@
-# Over-engineered To-Do List App
+# To-Do List App
 
-A deliberately over-engineered and WIP attempt at building a very simple to-do list web
-app, for demonstration and learning purposes.
+A very simple to-do list web app, for demonstration and learning purposes. Main branch
+should contain an ideal implementation. Others may contain over-engineered solutions as
+examples.
 
 ## Features
 
@@ -31,7 +32,6 @@ and marking them as complete.
   [Parcel](https://parceljs.org/) as opposed to this bare-metal-esque environment.
 - Implement a real API and DB (using [Koa](https://koajs.com/) and
   [MongoDB](https://www.mongodb.com/) or similar).
-- Consider [GraphQL](https://graphql.org/) over REST.
 - Put some thought into target browsers and implement [Babel](https://babeljs.io/) into the toolchain.
 - Actually use some nice looking component styles.
 
@@ -42,7 +42,8 @@ npm run format # formats (most) files/code with prettier.
 npm run lint # lints with ESLint.
 npm test # runs Jest tests (UI tests integrated with state management and mock API calls).
 npm run api # starts the API server (with a generated fake JSON document DB) at http://localhost:3001.
-npm run dev # starts the app dev server (with hot reloading) at http://localhost:3000.
+npm run client # starts the app dev server (with hot reloading) at http://localhost:3000.
+npm run dev # Run the API and app concurrently.
 npm run build # emits production build of the client app to dist/.
 npm start # hosts the production build at http://localhost:8080.
 ```
@@ -56,8 +57,9 @@ npm start # hosts the production build at http://localhost:8080.
 
 #### Dev
 
+- Make a mobx branch.
+- Make a graphql branch.
 - Make use of Context API and React Router somehow.
-- Improve REST API endpoints. Might be better for them all to just return all the latest items?
 - Would be nice to just use TS and ESM everywhere, instead of JS and CJS in places
   ([Babel](https://babeljs.io/) would help).
 - Tests for the unhappy paths, i.e, API POST/PUT validation errors and timeouts.
