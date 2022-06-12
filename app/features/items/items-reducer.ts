@@ -6,8 +6,10 @@ type ItemsAction =
   | { type: "update"; item: Item }
   | { type: "delete"; itemId: number };
 
-// TODO: Return values are not type safe. Add function/return type.
-export default function itemsReducer(items: Item[] = [], action: ItemsAction) {
+export default function itemsReducer(
+  items: Item[] = [],
+  action: ItemsAction
+): Item[] {
   switch (action.type) {
     case "get-all": {
       return action.items;
