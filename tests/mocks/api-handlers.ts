@@ -1,5 +1,5 @@
 import { rest, RestRequest } from "msw";
-import { Item } from "../../app/features/items/items-slice";
+import { Item } from "../../app/features/items/TodoList";
 
 let currentItemId = 1;
 

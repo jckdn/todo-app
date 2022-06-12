@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Item } from "./items-slice";
+import { Item } from "./TodoList";
 
 interface Props {
   item: Item;

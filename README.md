@@ -11,14 +11,12 @@ and marking them as complete.
 ## Architecture
 
 - The client app and its tests are written in TypeScript.
-- State is managed via [Redux Toolkit](https://redux-toolkit.js.org/) and
-  [React Redux](https://react-redux.js.org/).
 - Data is persisted to a JSON document via
   [json-server](https://github.com/typicode/json-server) (a fake REST API that is
   real enough for this demo).
   - On API startup the 'DB' is populated with some fake data via
     [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker).
-- UI tests are integrated with redux and mock API calls.
+- UI tests are integrated with mock API calls.
   - Uses [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/).
   - API calls are mocked via [Mock Service Worker (MSW)](https://mswjs.io/) - the actual
     API could be used in the tests but using msw is easier.
@@ -31,13 +29,6 @@ and marking them as complete.
 
 - Try using another framework/bundler such as [Next.js](https://nextjs.org/) or
   [Parcel](https://parceljs.org/) as opposed to this bare-metal-esque environment.
-- Possibly swap out Redux for React's `useContext` and `useReducer` hooks. Redux is
-  possibly overkill plus all the state may not need to be global.
-- Get rid of the container/presentation component separation pattern (i.e,
-  `TodoList.container.ts`). I did this to make testing easier before I integrated the
-  tests with Redux and the API calls and it's probably now an unecessary separation, since
-  the pattern predates React hooks:
-  https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 - Implement a real API and DB (using [Koa](https://koajs.com/) and
   [MongoDB](https://www.mongodb.com/) or similar).
 - Consider [GraphQL](https://graphql.org/) over REST.
@@ -65,6 +56,8 @@ npm start # hosts the production build at http://localhost:8080.
 
 #### Dev
 
+- Try to use context API and/or useReducer for examples.
+- Improve REST API endpoints. Might be better for them all to just return all the latest items?
 - Would be nice to just use TS and ESM everywhere, instead of JS and CJS in places
   ([Babel](https://babeljs.io/) would help).
 - Tests for the unhappy paths, i.e, API POST/PUT validation errors and timeouts.

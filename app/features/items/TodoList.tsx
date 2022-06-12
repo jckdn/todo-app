@@ -1,18 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoItem from "./TodoItem";
-import { useAppSelector, useAppDispatch } from "../../hooks";
-import { Item, addItem, updateItem, deleteItem } from "./items-slice";
+import itemApi from "../../api-client/item-api";
 
-function TodoList() {
-  const dispatch = useAppDispatch();
+export interface Item {
+  id?: number;
+  title: string;
+  complete: boolean;
+}
 
-  const items = useAppSelector((state) => {
-    return state.items;
-  });
+// Items are only passed as props for unit testing purposes.
+export interface TodoListProps {
+  items?: Item[];
+}
 
+function TodoList(props: TodoListProps) {
+  const [items, setItems] = useState<Item[]>(props.items || []);
   const [newItemTitle, setNewItemTitle] = useState("");
 
-  const handleAddItem = (event: React.FormEvent) => {
+  const getItems = async () => {
+    const items = await itemApi.getItems();
+
+    setItems(items);
+  };
+
+  useEffect(() => {
+    getItems();
+  }, []);
+
+  const handleAddItem = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const trimmedTitle = newItemTitle.trim();
@@ -21,17 +36,33 @@ function TodoList() {
       return;
     }
 
-    dispatch(addItem({ title: trimmedTitle, complete: false }));
+    const newItem = { title: trimmedTitle, complete: false };
 
+    const addedItem = await itemApi.addItem(newItem);
+
+    setItems([...items, addedItem]);
     setNewItemTitle("");
   };
 
-  const handleToggleItemComplete = (item: Item) => {
-    dispatch(updateItem({ ...item, complete: !item.complete }));
+  const handleToggleItemComplete = async (item: Item) => {
+    const updatedItem = await itemApi.addItem({
+      ...item,
+      complete: !item.complete,
+    });
+
+    const updatedItems = items.map((item) =>
+      item.id === updatedItem.id ? updatedItem : item
+    );
+
+    setItems(updatedItems);
   };
 
-  const handleDeleteItem = (id: number) => {
-    dispatch(deleteItem(id));
+  const handleDeleteItem = async (id: number) => {
+    await itemApi.deleteItem(id);
+
+    const updatedItems = items.filter((item) => item.id !== id);
+
+    setItems(updatedItems);
   };
 
   const addItemForm = (

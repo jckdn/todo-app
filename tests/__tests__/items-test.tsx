@@ -5,23 +5,19 @@ import {
   fireEvent,
   waitFor,
   waitForElementToBeRemoved,
-} from "../test-utils/react-test-utils";
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import TodoList from "../../app/features/items/TodoList";
 
-const mockInitialState = {
-  items: [
-    { id: 1, title: "title 1", complete: false },
-    { id: 2, title: "title 2 ", complete: false },
-    { id: 3, title: "title 3 ", complete: true },
-  ],
-};
+const mockInitialItems = [
+  { id: 1, title: "title 1", complete: false },
+  { id: 2, title: "title 2 ", complete: false },
+  { id: 3, title: "title 3 ", complete: true },
+];
 
 test("todo items render as expected", async () => {
-  render(<TodoList></TodoList>, {
-    initialState: mockInitialState,
-  });
+  render(<TodoList items={mockInitialItems}></TodoList>);
 
   const checkboxes = screen.getAllByRole("checkbox");
 
@@ -69,10 +65,14 @@ test("multiple items can be added", async () => {
   const input = screen.getByRole("textbox");
 
   await user.type(input, "title 1{enter}");
-  await user.type(input, "title 2{enter}");
 
   await waitFor(() => {
     screen.getByText("title 1");
+  });
+
+  await user.type(input, "title 2{enter}");
+
+  await waitFor(() => {
     screen.getByText("title 2");
   });
 });
@@ -111,9 +111,7 @@ test("titles of added items get trimmed", async () => {
 });
 
 test(`items' complete statuses can be toggled`, async () => {
-  render(<TodoList></TodoList>, {
-    initialState: mockInitialState,
-  });
+  render(<TodoList items={mockInitialItems}></TodoList>);
 
   const secondItemTitle = screen.getByText("title 2");
   const secondItemCheckbox = screen.getAllByRole("checkbox")[1];
@@ -130,9 +128,7 @@ test(`items' complete statuses can be toggled`, async () => {
 });
 
 test(`items can be deleted`, async () => {
-  render(<TodoList></TodoList>, {
-    initialState: mockInitialState,
-  });
+  render(<TodoList items={mockInitialItems}></TodoList>);
 
   const secondItemDeleteButton = screen.getAllByText("Delete")[1];
   fireEvent.click(secondItemDeleteButton);

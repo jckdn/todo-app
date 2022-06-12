@@ -1,4 +1,4 @@
-import { Item } from "../features/items/items-slice";
+import { Item } from "../features/items/TodoList";
 import { request, baseUrl } from "./api-utils";
 
 const itemsUrl = `${baseUrl}/items/`;
