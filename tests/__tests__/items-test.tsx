@@ -34,13 +34,12 @@ test("todo items render as expected", async () => {
 });
 
 test("items can be added using the Add button", async () => {
+  const user = userEvent.setup();
+
   render(<TodoList></TodoList>);
 
-  fireEvent.change(screen.getByRole("textbox"), {
-    target: { value: "title 1" },
-  });
-
-  fireEvent.click(screen.getByText("Add"));
+  await user.type(screen.getByRole("textbox"), "title 1{enter}");
+  await user.click(screen.getByText("Add"));
 
   await screen.findByText("title 1");
 });
@@ -110,21 +109,25 @@ test("titles of added items get trimmed", async () => {
   await screen.findByText("title 1");
 });
 
+// TODO: Better way than checking the css class?
 test(`items' complete statuses can be toggled`, async () => {
+  const user = userEvent.setup();
+
   render(<TodoList items={mockInitialItems}></TodoList>);
 
-  const secondItemTitle = screen.getByText("title 2");
-  const secondItemCheckbox = screen.getAllByRole("checkbox")[1];
+  const getSecondItemCheckbox = () => screen.getAllByRole("checkbox")[1];
 
   // Mark item as complete
-  fireEvent.click(secondItemCheckbox);
-  await waitFor(() => expect(secondItemCheckbox).toBeChecked());
-  expect(secondItemTitle).toHaveClass("todo-item__title--complete");
+  await user.click(getSecondItemCheckbox());
+  await waitFor(() => expect(getSecondItemCheckbox()).toBeChecked());
+  expect(screen.getByText("title 2")).toHaveClass("todo-item__title--complete");
 
   // Mark item as NOT complete
-  fireEvent.click(secondItemCheckbox);
-  await waitFor(() => expect(secondItemCheckbox).not.toBeChecked());
-  expect(secondItemTitle).not.toHaveClass("todo-item__title--complete");
+  await user.click(getSecondItemCheckbox());
+  await waitFor(() => expect(getSecondItemCheckbox()).not.toBeChecked());
+  expect(screen.getByText("title 2")).not.toHaveClass(
+    "todo-item__title--complete"
+  );
 });
 
 test(`items can be deleted`, async () => {

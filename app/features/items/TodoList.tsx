@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import TodoItem from "./TodoItem";
 import itemApi from "../../api-client/item-api";
+import itemsReducer from "./items-reducer";
 
 export interface Item {
   id?: number;
@@ -14,13 +15,12 @@ export interface TodoListProps {
 }
 
 function TodoList(props: TodoListProps) {
-  const [items, setItems] = useState<Item[]>(props.items || []);
+  const [items, dispatch] = useReducer(itemsReducer, props.items || []);
   const [newItemTitle, setNewItemTitle] = useState("");
 
   const getItems = async () => {
     const items = await itemApi.getItems();
-
-    setItems(items);
+    dispatch({ type: "get-all", items });
   };
 
   useEffect(() => {
@@ -37,10 +37,8 @@ function TodoList(props: TodoListProps) {
     }
 
     const newItem = { title: trimmedTitle, complete: false };
-
     const addedItem = await itemApi.addItem(newItem);
-
-    setItems([...items, addedItem]);
+    dispatch({ type: "add", item: addedItem });
     setNewItemTitle("");
   };
 
@@ -50,19 +48,13 @@ function TodoList(props: TodoListProps) {
       complete: !item.complete,
     });
 
-    const updatedItems = items.map((item) =>
-      item.id === updatedItem.id ? updatedItem : item
-    );
-
-    setItems(updatedItems);
+    dispatch({ type: "update", item: updatedItem });
   };
 
-  const handleDeleteItem = async (id: number) => {
-    await itemApi.deleteItem(id);
+  const handleDeleteItem = async (itemId: number) => {
+    await itemApi.deleteItem(itemId);
 
-    const updatedItems = items.filter((item) => item.id !== id);
-
-    setItems(updatedItems);
+    dispatch({ type: "delete", itemId });
   };
 
   const addItemForm = (

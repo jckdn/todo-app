@@ -56,10 +56,10 @@ npm start # hosts the production build at http://localhost:8080.
 
 #### Dev
 
-- Try to use context API and/or useReducer for examples.
+- Make use of Context API and React Router somehow.
 - Improve REST API endpoints. Might be better for them all to just return all the latest items?
 - Would be nice to just use TS and ESM everywhere, instead of JS and CJS in places
   ([Babel](https://babeljs.io/) would help).
 - Tests for the unhappy paths, i.e, API POST/PUT validation errors and timeouts.
 - Any remaining `TODO:` style comments in the code.
-- Replace fireEvent usages with user-event? https://testing-library.com/docs/user-event/intro
+- Replace any remaining fireEvent usages with user-event api https://testing-library.com/docs/user-event/intro
